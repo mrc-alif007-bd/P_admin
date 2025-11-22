@@ -35,7 +35,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open">
+                <li class="nav-item ">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -45,13 +45,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.php" class="nav-link ">
+                            <a href="<?php  echo $admin_url ?>students/index.php" class="nav-link ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>All Students</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="students/student_entry.php" class="nav-link">
+                            <a href="<?php  echo $admin_url ?>students/student_entry.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>New Students</p>
                             </a>

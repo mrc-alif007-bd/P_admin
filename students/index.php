@@ -1,4 +1,7 @@
-<?php include_once("../inc/db_config.php"); ?>
+<?php 
+include_once("../inc/db_config.php"); 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,6 +55,15 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
+
+          <?php
+          
+          if(isset($_SESSION['msg'])){
+            echo '<div class="alert alert-success">' . $_SESSION['msg'] . '</div>';
+            session_destroy();
+          }
+          
+          ?>
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">DataTable with default features</h3>
@@ -86,7 +98,12 @@
                     <td><?php echo $row->first_name; ?></td>
                     <td><?php echo $row->last_name; ?></td>
                     <td> <?php echo $row->birthdate; ?></td>
-                    <td>X</td>
+                    <td class="text-center">
+                      <a href="student_edit.php?stid=<?php echo $row->employeeID;?>"><i class="fas fa-edit"></i></a>
+                      &nbsp;
+                      <a onclick="return confrim('are you sure')" href="student_delete.php?stid=<?php echo $row->employeeID;?>"><i class="fas fa-trash"></i></a>
+
+                    </td>
                   </tr>
 
                   <?php endwhile ?>
