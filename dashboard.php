@@ -1,3 +1,10 @@
+<?php 
+session_start(); 
+if(!isset($_SESSION['loggedin'])){
+  header("Location:index.php");
+}
+
+?>
 <?php include_once("inc/db_config.php"); ?>
 <!DOCTYPE html>
 <html lang="en">

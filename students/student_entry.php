@@ -1,4 +1,11 @@
-<?php include_once("../inc/db_config.php"); ?>
+<?php 
+include_once("../inc/db_config.php");
+ session_start(); 
+if(!isset($_SESSION['loggedin'])){
+  header("Location:index.php");
+}
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +56,17 @@
                 if(isset($_REQUEST['submit'])){
                     extract($_POST) ;
 
-                    $sql = "INSERT INTO students VALUE (NULL, '$fname', '$lname', '$dob', '$notes')";
+                    
+                    
+                    if(isset($_FILES['photo'])){
+                      $photo_name = $_FILES['photo']['name'];
+                      $tmp_name = $_FILES['photo']['tmp_name'];
+                      $upload_path = "students/uploads/";
+                      $fullpath = $upload_path . $photo_name;
+                      move_uploaded_file($tmp_name, "uploads/".$photo_name);
+                    }
+
+                    $sql = "INSERT INTO students VALUES(NULL, '$fname', '$lname', '$dob', '$notes', '$fullpath')";
                     $db->query($sql);
                     if($db->affected_rows){
                         echo '<div class="alert alert-success"> Successfully Inserted</div>';
@@ -67,7 +84,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="" method="post">
+              <form id="quickForm" action="" method="post" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">First Name</label>
@@ -84,6 +101,10 @@
                   <div class="form-group">
                     <label for="exampleInputPassword1">Notes</label>
                    <Textarea name="notes" class="form-control" id="exampleInputPassword1" rows="5"></Textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Photo</label>
+                    <input type="file" name="photo" class="form-control" id="exampleInputPassword1" placeholder="Password">
                   </div>
                 </div>
                 <!-- /.card-body -->

@@ -1,5 +1,8 @@
 <?php
- include_once("../inc/db_config.php");
+
+include_once("../inc/db_config.php");
+ session_start();
+ 
 
  $id = $_GET['stid'];
 
